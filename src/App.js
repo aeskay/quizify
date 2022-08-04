@@ -1,57 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+// import { Counter } from './features/counter/Counter';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom'
+import FinalScreen from './pages/FinalScreen';
+import Questions from './pages/Questions';
+import Settings from './pages/Settings';
+import Home from './pages/Home';
+import { Container } from '@mui/material';
+import { Box } from '@mui/system';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const color = useSelector(state => state.counter.color);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <Box 
+        sx={{
+          backgroundColor: color, 
+          height:"100vh", 
+          display:"flex",
+          justifyContent:"center",
+          alignItems: "center"
+        }}
+      >
+      <Container maxWidth="sm" sx={{backgroundColor: "#fff"}}>
+        <Box textAlign="center" sx={{py: 5}}>
+        <Routes>
+
+          <Route path="/" element={<Home/>} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/questions" element={<Questions/>}/>
+          <Route path="/score" element={<FinalScreen/>}/>
+
+        </Routes>
+        </Box>
+      </Container>
+      </Box>
+    </Router>
   );
 }
 
