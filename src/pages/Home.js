@@ -37,7 +37,7 @@ function Home() {
     }
 
     return (
-        <Box mt="">
+        <Box>
             <Typography variant="h3" mt={5}>Welcome to Quizify</Typography>
             <Typography variant="h6" mt={1}>Select your favorite theme</Typography>
             <Box mt={3} sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center" }}>

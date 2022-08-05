@@ -22,12 +22,13 @@ function App() {
       <Box 
         sx={{
           backgroundColor: color, 
-          height:"100vh", 
+          minHeight: "100vh",
           display:"flex",
           justifyContent:"center",
           alignItems: "center"
         }}
       >
+      <Box>
       <Container  sx={{backgroundColor: "#fff", borderRadius: 10, width: 600, maxWidth:"95vw"}}>
         <Box textAlign="center" sx={{py: 5}}>
         <Routes>
@@ -40,6 +41,7 @@ function App() {
         </Routes>
         </Box>
       </Container>
+      </Box>
       </Box>
     </Router>
   );
