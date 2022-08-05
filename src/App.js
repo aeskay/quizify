@@ -28,7 +28,7 @@ function App() {
           alignItems: "center"
         }}
       >
-      <Container maxWidth="sm" sx={{backgroundColor: "#fff"}}>
+      <Container  sx={{backgroundColor: "#fff", borderRadius: 10, width: 600, maxWidth:"95vw"}}>
         <Box textAlign="center" sx={{py: 5}}>
         <Routes>
 
