@@ -41,7 +41,6 @@ function Questions() {
   const {response, loading} = useAxios({url: apiUrl})
   const [questionIndex, setQuestionIndex]  = useState(0)
   const [options, setOptions] = useState([]);
-
   useEffect(() => {
     if(response?.results.length){
       const question = response.results[questionIndex];
@@ -85,29 +84,40 @@ function Questions() {
     navigate("/")
   }
 
+  const handleRefresh = () => {
+    alert("Sorry, but this selection is not available at the moment. Kindly select another combination.");
+    navigate('/settings')
+  }
+
   return (
     <Box>
-      <Box sx={{display:"flex", justifyContent: "space-around", alignItems: "center"}}>
-        <HomeRoundedIcon onClick={handleBackHome} sx={{ fontSize: "50px", color: color, cursor:"pointer"}}></HomeRoundedIcon>
-        <Typography variant="h4">Question {questionIndex + 1}</Typography>
+      {response.results===[]?
+        handleRefresh():
+        <Box>
+        <Box sx={{display:"flex", justifyContent: "space-around", alignItems: "center"}}>
+          <HomeRoundedIcon onClick={handleBackHome} sx={{ fontSize: "50px", color: color, cursor:"pointer"}}></HomeRoundedIcon>
+          <Typography variant="h4">Question {questionIndex + 1}</Typography>
+        </Box>
+        <Typography mt={2}>{decode(response.results[questionIndex].question)}</Typography>
+        {options.map((item, id)=> {
+          return(
+            <Box mt={2} key={id}>
+              <Button 
+                variant="contained" 
+                sx={{backgroundColor:color}}
+                onClick={handleClickAnswer}>
+                {decode(item)}
+              </Button>
+            </Box>
+          )
+        })}
+        
+        <Box mt={5}>
+        <Button>Score: {score} / {response.results.length}</Button>
+        </Box>
       </Box>
-      <Typography mt={2}>{decode(response.results[questionIndex].question)}</Typography>
-      {options.map((item, id)=> {
-        return(
-          <Box mt={2} key={id}>
-            <Button 
-              variant="contained" 
-              sx={{backgroundColor:color}}
-              onClick={handleClickAnswer}>
-              {decode(item)}
-            </Button>
-          </Box>
-        )
-      })}
+      }
       
-      <Box mt={5}>
-      <Button>Score: {score} / {response.results.length}</Button>
-      </Box>
     </Box>
   )
 }
